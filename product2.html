@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR SHINJU | ESSENTIAL</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: white;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
 
+        .nav-back { padding: 40px 60px; }
+        .nav-back a { color: white; text-decoration: none; font-size: 11px; letter-spacing: 3px; opacity: 0.4; transition: 0.3s; }
+        .nav-back a:hover { opacity: 1; }
+
+        .container {
+            display: flex;
+            padding: 0 60px 100px 60px;
+            gap: 100px;
+            max-width: 1300px;
+            margin: 0 auto;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        /* 入场动画 */
+        .image-box { flex: 1.2; text-align: right; }
+        .image-box img {
+            width: 100%;
+            max-width: 550px;
+            opacity: 0;
+            animation: clearFadeUp 1.2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+        }
+
+        .info-box { flex: 1; max-width: 400px; opacity: 0; animation: clearFadeUp 1.2s cubic-bezier(0.2, 1, 0.3, 1) 0.3s forwards; }
+
+        .tag { font-size: 10px; color: #555; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; }
+        h1 { font-size: 36px; letter-spacing: 6px; font-weight: 500; margin: 0 0 40px 0; line-height: 1.2; }
+
+        .limit-box {
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            padding: 25px 0;
+            margin-bottom: 40px;
+        }
+        .limit-label { font-size: 9px; color: #444; letter-spacing: 2px; margin-bottom: 8px; }
+        .limit-value { font-family: monospace; font-size: 18px; letter-spacing: 2px; }
+
+        .desc { font-size: 14px; line-height: 1.8; color: #888; margin-bottom: 40px; letter-spacing: 0.5px; }
+        .price { font-size: 24px; letter-spacing: 2px; font-weight: 300; }
+
+        @keyframes clearFadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 900px) {
+            .container { flex-direction: column; text-align: center; padding: 0 30px 60px 30px; }
+            .image-box { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-back"><a href="index.html">← BACK TO COLLECTION</a></nav>
+
+    <div class="container">
+        <div class="image-box"><img src="shirt2.png" alt="Noir Shinju Essential Tee"></div>
+        
+        <div class="info-box">
+            <div class="tag">Genesis Series</div>
+            <h1>NOIR SHINJU<br>ESSENTIAL TEE</h1>
+            
+            <div class="limit-box">
+                <div class="limit-label">AVAILABILITY</div>
+                <div class="limit-value">LIMITED EDITION 1 OF 10</div>
+            </div>
+
+            <div class="desc">
+                Signature boxy fit. <br>
+                Crafted in Tokyo with premium heavyweight cotton. 
+                A timeless silhouette designed for the modern minimalist.
+            </div>
+
+            <div class="price">299 €</div>
+        </div>
+    </div>
+</body>
+</html>
