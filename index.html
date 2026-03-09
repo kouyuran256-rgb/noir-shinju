@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOIR SHINJU | HOME</title>
     <style>
-        /* 基础样式 */
+        /* Base Styles */
         body {
             margin: 0;
             background: black;
@@ -16,7 +16,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- 导航栏优化 --- */
+        /* --- Navigation --- */
         nav {
             position: fixed; 
             top: 0;
@@ -27,10 +27,9 @@
             padding: 25px 60px;
             z-index: 999;
             transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-            box-sizing: border-box; /* 确保padding不会撑开宽度 */
+            box-sizing: border-box;
         }
 
-        /* 下滑时的毛玻璃变色效果 */
         nav.scrolled {
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(15px);
@@ -65,7 +64,7 @@
             opacity: 1; 
         }
 
-        /* --- Hero 区域 --- */
+        /* --- Hero Section --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -73,7 +72,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* 黑色遮罩层确保文字可见 */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url("https://images.unsplash.com/photo-1520975922284-9f3c1b7c0c2d?q=80&w=2000") center/cover no-repeat;
         }
@@ -91,9 +89,11 @@
             font-size: 12px;
             margin-top: 25px;
             animation: clearFadeUp 1.4s cubic-bezier(0.2, 1, 0.3, 1) 0.4s forwards;
+            text-transform: uppercase;
+            color: #888;
         }
 
-        /* --- 产品列表区 --- */
+        /* --- Collection Grid --- */
         .collection { 
             padding: 140px 60px; 
             max-width: 1400px;
@@ -143,20 +143,20 @@
             text-transform: uppercase;
         }
 
-        /* 动画关键帧 */
+        /* Animations */
         @keyframes clearFadeUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 页脚 */
+        /* Footer */
         footer {
             padding: 100px 60px;
             text-align: center;
             border-top: 1px solid #111;
         }
 
-        /* 移动端适配 */
+        /* Mobile Responsive */
         @media (max-width: 850px) {
             .grid { grid-template-columns: 1fr; gap: 60px; }
             nav { padding: 20px 30px; }
@@ -171,9 +171,9 @@
     <nav id="mainNav">
         <a href="index.html" class="logo">NOIR SHINJU</a>
         <div class="menu">
-            <a href="index.html">Home</a>
-            <a href="#collection">Collection</a>
-            <a href="https://www.instagram.com/noirshinju?igsh=emhvdDdpZmVydXFy&utm_source=qr" target="_blank">Instagram</a>
+            <a href="index.html">HOME</a>
+            <a href="#collection">COLLECTION</a>
+            <a href="https://www.instagram.com/noirshinju" target="_blank">INSTAGRAM</a>
         </div>
     </nav>
 
@@ -195,7 +195,7 @@
             <a href="about.html" class="card-link">
                 <div class="card">
                     <img src="shirt3.png"> 
-                    <p>BRAND STORY / 品牌介绍</p>
+                    <p>BRAND STORY / 00</p>
                 </div>
             </a>
         </div>
@@ -208,7 +208,7 @@
     </footer>
 
     <script>
-        // 1. 导航栏滚动变色
+        // Scroll navigation effect
         const nav = document.getElementById('mainNav');
         window.onscroll = function() {
             if (window.scrollY > 80) {
@@ -218,7 +218,7 @@
             }
         };
 
-        // 2. 产品卡片滚动显现动画
+        // Reveal animation on scroll
         const cards = document.querySelectorAll('.card-link');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
