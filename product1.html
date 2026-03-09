@@ -1,95 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR SHINJU | GOLF TEE</title>
 
-<meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: white;
+            font-family: Helvetica, Arial, sans-serif;
+            /* 禁用选择，增加证书般的仪式感 */
+            user-select: none;
+            overflow-x: hidden;
+        }
 
-<title>Noir Shinju Product</title>
+        /* 顶部简易返回，保持品牌感 */
+        .brand-header {
+            padding: 40px 60px;
+        }
 
-<style>
+        .brand-header a {
+            color: white;
+            text-decoration: none;
+            letter-spacing: 5px;
+            font-size: 14px;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
 
-body{
-margin:0;
-background:black;
-color:white;
-font-family:Helvetica,Arial,sans-serif;
-}
+        .brand-header a:hover {
+            opacity: 1;
+        }
 
-.container{
+        .container {
+            display: flex;
+            padding: 40px 80px 80px 80px;
+            gap: 100px;
+            align-items: center;
+            min-height: 70vh;
+        }
 
-display:flex;
-padding:80px;
-gap:60px;
+        /* 产品图容器 */
+        .product-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
 
-}
+        img {
+            width: 100%;
+            max-width: 500px;
+            /* 增加轻微的入场动画 */
+            animation: fadeIn 1.5s ease;
+        }
 
-img{
+        /* 产品信息 */
+        .info {
+            flex: 1;
+            max-width: 450px;
+        }
 
-width:500px;
+        .tag {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #666;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
 
-}
+        h1 {
+            font-size: 32px;
+            letter-spacing: 6px;
+            margin: 0 0 25px 0;
+            font-weight: normal;
+        }
 
-.info{
+        p {
+            line-height: 1.8;
+            color: #999;
+            font-size: 15px;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
 
-max-width:400px;
+        /* 价格展示：去掉了按钮，价格成为了底部的一个安静标签 */
+        .price {
+            font-size: 20px;
+            letter-spacing: 3px;
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            display: inline-block;
+            width: 100%;
+        }
 
-}
+        .auth-label {
+            margin-top: 40px;
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: #444;
+            text-transform: uppercase;
+        }
 
-h1{
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-letter-spacing:4px;
-
-}
-
-.price{
-
-font-size:22px;
-margin:20px 0;
-
-}
-
-button{
-
-background:white;
-border:none;
-padding:12px 30px;
-cursor:pointer;
-font-size:16px;
-
-}
-
-button:hover{
-
-background:#ddd;
-
-}
-
-</style>
-
+        /* 手机端适配：扫码多为手机操作 */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                padding: 40px;
+                gap: 50px;
+                text-align: center;
+            }
+            .product-image {
+                justify-content: center;
+            }
+            img {
+                width: 80%;
+            }
+            .info {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <header class="brand-header">
+        <a href="index.html">NOIR SHINJU</a>
+    </header>
 
-<div>
-<img src="shirt1.png">
-</div>
+    <div class="container">
 
-<div class="info">
+        <div class="product-image">
+            <img src="shirt1.png" alt="Noir Shinju Golf Tee">
+        </div>
 
-<h1>NOIR SHINJU GOLF TEE</h1>
+        <div class="info">
+            <div class="tag">Edition 01 / Series A</div>
+            <h1>NOIR SHINJU<br>GOLF TEE</h1>
 
-<p>Minimal golf inspired streetwear piece from Noir Shinju.</p>
+            <p>
+                Minimal golf inspired streetwear piece from Noir Shinju. 
+                Designed for the modern individual who values quiet luxury 
+                and precision in every detail.
+            </p>
 
-<div class="price">$60</div>
+            <div class="price">299 €</div>
+            
+            <div class="auth-label">Authentic Garment / Permanent Collection</div>
+        </div>
 
-<button>BUY</button>
-
-</div>
-
-</div>
+    </div>
 
 </body>
 
