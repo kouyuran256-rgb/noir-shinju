@@ -1,266 +1,295 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR SHINJU | Quiet Luxury</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-<title>Noir Shinju</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--accent-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-body{
-margin:0;
-font-family:Helvetica,Arial,sans-serif;
-background:black;
-color:white;
-overflow-x:hidden;
-}
+        /* 导航栏优化：增加毛玻璃效果和滚动变色 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 60px;
+            z-index: 100;
+            transition: var(--transition);
+        }
 
-/* 顶部导航 */
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 60px;
+        }
 
-nav{
-position:absolute;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-padding:30px 60px;
-letter-spacing:3px;
-z-index:10;
-}
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
 
-.logo{
-font-size:20px;
-font-weight:600;
-}
+        .menu a {
+            margin-left: 35px;
+            text-decoration: none;
+            color: var(--accent-color);
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
 
-.menu a{
-margin-left:30px;
-text-decoration:none;
-color:white;
-opacity:0.8;
-}
+        .menu a:hover {
+            opacity: 1;
+        }
 
-.menu a:hover{
-opacity:1;
-}
+        /* Hero Section 优化：增加视差感 */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url("https://images.unsplash.com/photo-1520975922284-9f3c1b7c0c2d?auto=format&fit=crop&q=80") center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-/* 首页背景 */
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 8vw, 90px); /* 响应式字体大小 */
+            letter-spacing: 15px;
+            margin-bottom: 20px;
+            animation: heroFade 1.8s ease-out;
+        }
 
-.hero{
-height:100vh;
-background:url("https://images.unsplash.com/photo-1520975922284-9f3c1b7c0c2d") center/cover no-repeat;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-position:relative;
-}
+        .hero p {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: var(--text-muted);
+            animation: heroFade 2.5s ease-out;
+        }
 
-/* 黑色遮罩 */
+        @keyframes heroFade {
+            from { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
 
-.hero::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.55);
-}
+        /* Collection 布局优化 */
+        .collection {
+            padding: 120px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-/* 标题 */
+        .collection h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            letter-spacing: 8px;
+            margin-bottom: 80px;
+            text-align: center;
+        }
 
-.hero h1{
-font-size:90px;
-letter-spacing:15px;
-z-index:2;
-animation:fade 2s ease;
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+        }
 
-.hero p{
-z-index:2;
-font-size:18px;
-opacity:0.8;
-letter-spacing:3px;
-}
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
 
-/* 动画 */
+        .card {
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
 
-@keyframes fade{
+        .img-container {
+            width: 100%;
+            aspect-ratio: 3/4; /* 统一产品图比例 */
+            background: #1a1a1a;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
 
-from{
-opacity:0;
-transform:translateY(30px);
-}
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: grayscale(30%);
+        }
 
-to{
-opacity:1;
-transform:translateY(0);
-}
+        .card:hover img {
+            transform: scale(1.08);
+            filter: grayscale(0%);
+        }
 
-}
+        .card p {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-align: center;
+            opacity: 0.8;
+        }
 
-/* collection */
+        /* 滚动展示动画 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: var(--transition);
+        }
 
-.collection{
-padding:120px 60px;
-text-align:center;
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.collection h2{
-font-size:32px;
-letter-spacing:6px;
-margin-bottom:70px;
-}
+        /* Footer */
+        footer {
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:40px;
-}
+        /* 移动端适配 */
+        @media (max-width: 992px) {
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            nav { padding: 20px 30px; }
+        }
 
-.card{
-background:#111;
-padding:0;
-overflow:hidden;
-transition:0.4s;
-text-align:center;
-}
-
-.card img{
-width:100%;
-display:block;
-}
-
-.card p{
-padding:15px;
-letter-spacing:2px;
-}
-
-.card:hover{
-background:#222;
-transform:scale(1.05);
-}
-
-/* footer */
-
-footer{
-padding:50px;
-text-align:center;
-opacity:0.5;
-}
-
-/* 滚动动画 */
-
-.reveal{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-}
-
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
-
-</style>
-
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            nav .menu { display: none; } /* 手机端建议隐藏菜单或做成汉堡菜单 */
+            .hero h1 { letter-spacing: 8px; }
+        }
+    </style>
 </head>
 
 <body>
 
-<nav>
+    <nav id="navbar">
+        <div class="logo">NOIR SHINJU</div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#collection">Collection</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
 
-<div class="logo">
-NOIR SHINJU
-</div>
+    <section class="hero">
+        <h1>NOIR SHINJU</h1>
+        <p>Quiet luxury in dark tones</p>
+    </section>
 
-<div class="menu">
+    <section class="collection" id="collection">
+        <h2 class="reveal">LATEST COLLECTION</h2>
+        
+        <div class="grid">
+            <a href="product1.html" class="card-link reveal">
+                <div class="card">
+                    <div class="img-container">
+                        <img src="shirt1.png" alt="Golf Tee">
+                    </div>
+                    <p>NOIR SHINJU GOLF TEE</p>
+                </div>
+            </a>
 
-<a href="#">Home</a>
-<a href="#">Collection</a>
-<a href="#">About</a>
-<a href="#">Contact</a>
+            <a href="#" class="card-link reveal">
+                <div class="card">
+                    <div class="img-container">
+                        <img src="shirt2.png" alt="Collection">
+                    </div>
+                    <p>NOIR SHINJU COLLECTION</p>
+                </div>
+            </a>
 
-</div>
+            <a href="#" class="card-link reveal">
+                <div class="card">
+                    <div class="img-container">
+                        <img src="shirt3.png" alt="Limited Edition">
+                    </div>
+                    <p>NOIR SHINJU LIMITED</p>
+                </div>
+            </a>
+        </div>
+    </section>
 
-</nav>
+    <footer>
+        &copy; 2026 NOIR SHINJU. ALL RIGHTS RESERVED.
+    </footer>
 
-<section class="hero">
+    <script>
+        // 1. 滚动显示元素
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            const windowHeight = window.innerHeight;
+            
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add("active");
+                }
+            });
+        }
 
-<h1>NOIR SHINJU</h1>
+        // 2. 导航栏滚动变色
+        function handleScroll() {
+            const nav = document.getElementById("navbar");
+            if (window.scrollY > 50) {
+                nav.classList.add("scrolled");
+            } else {
+                nav.classList.remove("scrolled");
+            }
+        }
 
-<p>Quiet luxury in dark tones</p>
+        window.addEventListener("scroll", () => {
+            reveal();
+            handleScroll();
+        });
 
-</section>
-
-<section class="collection reveal">
-
-<h2>COLLECTION</h2>
-
-<div class="grid">
-
-<a href="product1.html">
-
-<div class="card reveal">
-<img src="shirt1.png">
-<p>NOIR SHINJU GOLF TEE</p>
-</div>
-
-</a>
-
-
-<div class="card reveal">
-<img src="shirt2.png">
-<p>NOIR SHINJU COLLECTION</p>
-</div>
-
-<div class="card reveal">
-<img src="shirt3.png">
-<p>NOIR SHINJU LIMITED</p>
-</div>
-
-</div>
-
-
-</section>
-
-<footer>
-
-© 2026 Noir Shinju
-
-</footer>
-
-<script>
-
-function reveal(){
-
-var reveals=document.querySelectorAll(".reveal");
-
-for(var i=0;i<reveals.length;i++){
-
-var windowHeight=window.innerHeight;
-var elementTop=reveals[i].getBoundingClientRect().top;
-var elementVisible=100;
-
-if(elementTop<windowHeight-elementVisible){
-
-reveals[i].classList.add("active");
-
-}
-
-}
-
-}
-
-window.addEventListener("scroll",reveal);
-
-</script>
+        // 页面加载时执行一次
+        window.addEventListener("load", () => {
+            reveal();
+        });
+    </script>
 
 </body>
-
 </html>
