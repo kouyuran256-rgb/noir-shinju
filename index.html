@@ -157,7 +157,16 @@ text-align:center;
 opacity:0.5;
 
 }
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
 
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
 </style>
 
 </head>
@@ -191,17 +200,17 @@ NOIR SHINJU
 </section>
 
 
-<section class="collection">
+<section class="collection reveal">
+
 
 <h2>COLLECTION</h2>
 
 <div class="grid">
 
-<div class="card">BLACK PEARL</div>
+<div class="card reveal">BLACK PEARL</div>
+<div class="card reveal">MIDNIGHT SILK</div>
+<div class="card reveal">SHADOW LINE</div>
 
-<div class="card">MIDNIGHT SILK</div>
-
-<div class="card">SHADOW LINE</div>
 
 </div>
 
@@ -213,7 +222,31 @@ NOIR SHINJU
 © 2026 Noir Shinju
 
 </footer>
+<script>
 
+function reveal(){
+
+var reveals=document.querySelectorAll(".reveal");
+
+for(var i=0;i<reveals.length;i++){
+
+var windowHeight=window.innerHeight;
+var elementTop=reveals[i].getBoundingClientRect().top;
+var elementVisible=100;
+
+if(elementTop<windowHeight-elementVisible){
+
+reveals[i].classList.add("active");
+
+}
+
+}
+
+}
+
+window.addEventListener("scroll",reveal);
+
+</script>
 </body>
 
 </html>
