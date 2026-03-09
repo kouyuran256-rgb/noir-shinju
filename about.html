@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR SHINJU | SCÈNE 01</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: white;
+            font-family: 'Times New Roman', serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 2.2;
+        }
+
+        .nav-back { padding: 40px 60px; }
+        .nav-back a { color: white; text-decoration: none; font-size: 11px; letter-spacing: 3px; opacity: 0.3; transition: 0.5s; }
+        .nav-back a:hover { opacity: 1; }
+
+        .about-container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 80px 40px 150px 40px;
+        }
+
+        /* 核心金句：法语版 */
+        .quote-main {
+            font-size: 24px;
+            letter-spacing: 5px;
+            margin-bottom: 120px;
+            font-weight: 300;
+            color: #fff;
+            text-align: left;
+            font-style: italic; /* 斜体增加浪漫感 */
+            animation: fadeIn 3s ease;
+        }
+
+        .film-scene {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: clearFadeUp 1.5s ease 1s forwards;
+        }
+
+        .scene-label {
+            font-size: 10px;
+            color: #444;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .scene-content {
+            font-size: 15px;
+            color: #999;
+            letter-spacing: 1.2px;
+        }
+
+        .scene-content b { color: #eee; font-weight: 400; }
+
+        .footer-credit {
+            margin-top: 150px;
+            border-top: 1px solid #111;
+            padding-top: 40px;
+            font-size: 10px;
+            color: #333;
+            letter-spacing: 5px;
+            text-align: center;
+        }
+
+        @keyframes clearFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; filter: blur(10px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+
+        @media (max-width: 768px) {
+            .about-container { padding: 40px 30px; }
+            .quote-main { font-size: 19px; line-height: 1.8; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-back"><a href="index.html">← SORTIE</a></nav>
+
+    <div class="about-container">
+        
+        <div class="quote-main">
+            “La tendresse venue de France,<br>
+            a su émouvoir les perles du monde.”
+        </div>
+
+        <div class="film-scene">
+            <span class="scene-label">SCÈNE 01: TOKYO MINUIT</span>
+            <div class="scene-content">
+                Dans la nuit profonde de Tokyo, chaque âme est une perle enfouie dans le marbre noir. 
+                Lisse, solide, enveloppée d'une froideur polie.
+            </div>
+        </div>
+
+        <div class="film-scene" style="animation-delay: 1.8s;">
+            <span class="scene-label">SCÈNE 02: LA RENCONTRE</span>
+            <div class="scene-content">
+                Jusqu'à ce que surgisse cette tendresse française. 
+                Elle ne cache pas son amour, elle ne craint pas l'expression. 
+                Une ardeur rencontrant la rigueur tokyoïte, comme une goutte de couleur tombant sur la dernière scène d'un film en noir et blanc.
+            </div>
+        </div>
+
+        <div class="film-scene" style="animation-delay: 2.6s;">
+            <span class="scene-label">SCÈNE 03: NOIR SHINJU</span>
+            <div class="scene-content">
+                <b>NOIR SHINJU</b> est né de cet imprévu. 
+                Nous ne croyons pas au tumulte de la "fast-fashion", nous ne capturons que l'instant où l'on est ému. 
+                Chaque création est un souvenir limité à <b>10 exemplaires</b> dans le monde.
+            </div>
+        </div>
+
+        <div class="footer-credit">
+            CRÉÉ À TOKYO / GENÈSE 2026
+        </div>
+
+    </div>
+</body>
+</html>
