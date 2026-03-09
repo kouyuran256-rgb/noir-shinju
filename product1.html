@@ -1,169 +1,92 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOIR SHINJU | LIMITED 1/10</title>
-
+    <title>NOIR SHINJU | 1 OF 10</title>
     <style>
         body {
             margin: 0;
-            background-color: black;
+            background: black;
             color: white;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 顶部导航 */
-        .back-nav {
-            padding: 40px 60px;
-        }
-        .back-nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 3px;
-            opacity: 0.5;
-            transition: 0.3s;
-        }
-        .back-nav a:hover { opacity: 1; }
+        .nav-back { padding: 40px 60px; }
+        .nav-back a { color: white; text-decoration: none; font-size: 11px; letter-spacing: 3px; opacity: 0.4; transition: 0.3s; }
+        .nav-back a:hover { opacity: 1; }
 
-        /* 主容器 */
         .container {
             display: flex;
             padding: 0 60px 100px 60px;
-            gap: 80px;
-            max-width: 1200px;
+            gap: 100px;
+            max-width: 1300px;
             margin: 0 auto;
             align-items: center;
+            min-height: 80vh;
         }
 
-        .image-box {
-            flex: 1;
-            text-align: right;
-        }
+        /* 图片区域动画：清爽浮现 */
+        .image-box { flex: 1.2; text-align: right; }
         .image-box img {
             width: 100%;
-            max-width: 500px;
-            animation: fadeIn 1.5s ease;
+            max-width: 550px;
+            opacity: 0;
+            animation: clearFadeUp 1.2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
         }
 
-        .info-box {
-            flex: 1;
-            max-width: 400px;
-        }
+        /* 文字区域动画：比图片晚 0.3 秒 */
+        .info-box { flex: 1; max-width: 400px; opacity: 0; animation: clearFadeUp 1.2s cubic-bezier(0.2, 1, 0.3, 1) 0.3s forwards; }
 
-        .collection-name {
-            font-size: 11px;
-            letter-spacing: 4px;
-            color: #666;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
+        .tag { font-size: 10px; color: #555; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; }
+        h1 { font-size: 36px; letter-spacing: 6px; font-weight: 500; margin: 0 0 40px 0; line-height: 1.2; }
 
-        h1 {
-            font-size: 32px;
-            letter-spacing: 5px;
-            margin: 0 0 30px 0;
-            font-weight: 500;
-        }
-
-        /* 限量展示区：修改为 1 of 10 */
-        .serial-section {
-            display: flex;
-            flex-direction: column; /* 改为垂直排列更显高级 */
-            gap: 15px;
+        .limit-box {
             border-top: 1px solid #222;
             border-bottom: 1px solid #222;
             padding: 25px 0;
-            margin-bottom: 30px;
-        }
-
-        .serial-label {
-            font-size: 10px;
-            color: #444;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .serial-number {
-            font-family: monospace;
-            font-size: 18px;
-            color: #fff;
-            letter-spacing: 2px;
-            font-weight: bold;
-        }
-
-        .description {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #888;
             margin-bottom: 40px;
         }
+        .limit-label { font-size: 9px; color: #444; letter-spacing: 2px; margin-bottom: 8px; }
+        .limit-value { font-family: monospace; font-size: 18px; letter-spacing: 2px; }
 
-        .price {
-            font-size: 24px;
-            letter-spacing: 2px;
-            font-weight: 300;
-        }
+        .desc { font-size: 14px; line-height: 1.8; color: #888; margin-bottom: 40px; letter-spacing: 0.5px; }
+        .price { font-size: 24px; letter-spacing: 2px; font-weight: 300; }
 
-        .footer-tag {
-            margin-top: 50px;
-            font-size: 10px;
-            letter-spacing: 4px;
-            color: #222; /* 颜色调深，若有若无的感觉 */
-            text-transform: uppercase;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes clearFadeUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 850px) {
-            .container {
-                flex-direction: column;
-                padding: 0 30px 80px 30px;
-                text-align: center;
-            }
+        @media (max-width: 900px) {
+            .container { flex-direction: column; text-align: center; padding: 0 30px 60px 30px; }
             .image-box { text-align: center; }
         }
     </style>
 </head>
-
 <body>
-
-    <nav class="back-nav">
-        <a href="index.html">← NOIR SHINJU</a>
-    </nav>
+    <nav class="nav-back"><a href="index.html">← BACK TO COLLECTION</a></nav>
 
     <div class="container">
-        <div class="image-box">
-            <img src="shirt1.png" alt="Noir Shinju Golf Tee">
-        </div>
-
+        <div class="image-box"><img src="shirt1.png" alt="Noir Shinju Golf Tee"></div>
         <div class="info-box">
-            <div class="collection-name">Genesis Release</div>
-            <h1>GOLF TEE</h1>
-
-            <div class="serial-section">
-                <div class="serial-label">Availability</div>
-                <div class="serial-number">LIMITED EDITION 1 OF 10</div>
+            <div class="tag">Genesis Series</div>
+            <h1>NOIR SHINJU<br>GOLF TEE</h1>
+            
+            <div class="limit-box">
+                <div class="limit-label">AVAILABILITY</div>
+                <div class="limit-value">LIMITED EDITION 1 OF 10</div>
             </div>
 
-            <div class="description">
-                Minimal golf inspired streetwear piece.<br>
-                Handcrafted as part of our exclusive first drop. 
-                Only 10 units exist globally.
+            <div class="desc">
+                Minimal golf inspired streetwear. <br>
+                Crafted in Tokyo. Part of the first 10 units ever released. 
+                Quiet luxury for the modern era.
             </div>
 
             <div class="price">299 €</div>
-
-            <div class="footer-tag">Noir Shinju Authenticity Guaranteed</div>
         </div>
     </div>
-
 </body>
-
 </html>
