@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOIR SHINJU | HOME</title>
     <style>
+        /* 基础样式 */
         body {
             margin: 0;
             background: black;
@@ -12,23 +13,56 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth; /* 让点击跳转时是平滑滚动的 */
         }
 
-        /* 顶部导航 */
+        /* --- 导航栏优化 --- */
         nav {
-            position: absolute;
+            position: fixed; /* 固定在顶部 */
             top: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 30px 60px;
-            letter-spacing: 3px;
-            z-index: 10;
+            align-items: center;
+            padding: 20px 60px;
+            z-index: 999; /* 确保在最上层 */
+            transition: all 0.4s ease; /* 增加过渡动画 */
         }
-        .logo { font-weight: 600; font-size: 18px; }
-        .menu a { margin-left: 30px; text-decoration: none; color: white; opacity: 0.6; font-size: 12px; }
 
-        /* 首屏视觉 */
+        /* 当页面下滑时，给导航栏增加黑色半透明背景（通过JS触发） */
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px); /* 苹果风格的毛玻璃效果 */
+            padding: 15px 60px;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo { 
+            font-weight: 700; 
+            font-size: 18px; 
+            letter-spacing: 4px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .menu a { 
+            text-decoration: none; 
+            color: white; 
+            opacity: 0.7; 
+            font-size: 12px; 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .menu a:hover { 
+            opacity: 1; 
+        }
+
+        /* --- 首页区域 --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -36,7 +70,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                         url("https://images.unsplash.com/photo-1520975922284-9f3c1b7c0c2d?q=80&w=2000") center/cover no-repeat;
         }
 
@@ -44,74 +78,126 @@
             font-size: clamp(40px, 8vw, 80px);
             letter-spacing: 15px;
             margin: 0;
-            /* 这里的动画去掉了模糊，只保留透明度和位移 */
             animation: clearFadeUp 1.2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
         }
 
-        .hero p {
-            letter-spacing: 5px;
-            opacity: 0;
-            font-size: 12px;
-            margin-top: 20px;
-            animation: clearFadeUp 1.2s cubic-bezier(0.2, 1, 0.3, 1) 0.3s forwards;
+        /* --- 产品列表区 --- */
+        .collection { 
+            padding: 120px 60px; 
+            text-align: center; 
         }
 
-        /* 产品列表区 */
-        .collection { padding: 100px 60px; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
+        .collection h2 {
+            font-size: 24px;
+            letter-spacing: 8px;
+            margin-bottom: 60px;
+            opacity: 0.8;
+        }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 40px; 
+        }
         
-        .card-link { text-decoration: none; color: inherit; opacity: 0; }
-        .card-link.active { animation: clearFadeUp 1s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
+        .card-link { 
+            text-decoration: none; 
+            color: inherit; 
+            opacity: 0; 
+            transform: translateY(30px);
+            transition: 1s all ease;
+        }
 
-        .card img { width: 100%; transition: 0.5s; filter: brightness(0.8); }
-        .card:hover img { transform: scale(1.03); filter: brightness(1); }
-        .card p { margin-top: 15px; font-size: 11px; letter-spacing: 2px; }
+        .card-link.active { 
+            opacity: 1; 
+            transform: translateY(0);
+        }
 
-        /* 核心动画：清爽高清 */
+        .card img { 
+            width: 100%; 
+            transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); 
+            filter: brightness(0.7); 
+        }
+        
+        .card:hover img { 
+            transform: scale(1.05); 
+            filter: brightness(1); 
+        }
+
+        .card p { 
+            margin-top: 20px; 
+            font-size: 11px; 
+            letter-spacing: 2px; 
+            color: #888;
+        }
+
+        /* 动画逻辑 */
         @keyframes clearFadeUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* 移动端适配 */
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr; }
-            nav { padding: 20px; }
+            nav { padding: 20px 30px; }
+            nav.scrolled { padding: 15px 30px; }
+            .menu { display: none; } /* 手机端暂时隐藏菜单，或可改为汉堡包 */
         }
     </style>
 </head>
 <body>
-    <nav>
+
+    <nav id="mainNav">
         <div class="logo">NOIR SHINJU</div>
-        <div class="menu"><a href="#">Home</a><a href="#collection">Collection</a></div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="#collection">Collection</a>
+            <a href="mailto:contact@noirshinju.com">Contact</a>
+        </div>
     </nav>
 
     <section class="hero">
         <h1>NOIR SHINJU</h1>
-        <p>Quiet luxury in dark tones</p>
+        <p style="letter-spacing: 5px; opacity: 0.6; font-size: 12px; margin-top: 20px;">Quiet luxury in dark tones</p>
     </section>
 
     <section class="collection" id="collection">
+        <h2>THE GENESIS</h2>
         <div class="grid">
-            <a href="product1.html" class="card-link active">
-                <div class="card"><img src="shirt1.png"><p>NOIR SHINJU 01</p></div>
+            <a href="product1.html" class="card-link">
+                <div class="card"><img src="shirt1.png"><p>GOLF TEE / 1 OF 10</p></div>
             </a>
-            <a href="product2.html" class="card-link active" style="animation-delay: 0.2s;">
-                <div class="card"><img src="shirt2.png"><p>NOIR SHINJU 02</p></div>
+            <a href="product2.html" class="card-link">
+                <div class="card"><img src="shirt2.png"><p>ESSENTIAL / 1 OF 10</p></div>
             </a>
-            <a href="product3.html" class="card-link active" style="animation-delay: 0.4s;">
-                <div class="card"><img src="shirt3.png"><p>NOIR SHINJU 03</p></div>
+            <a href="product3.html" class="card-link">
+                <div class="card"><img src="shirt3.png"><p>LIMITED / 1 OF 10</p></div>
             </a>
         </div>
     </section>
 
     <script>
-        // 简单的滚动触发动画逻辑
+        // 1. 导航栏滚动变色逻辑
+        const nav = document.getElementById('mainNav');
+        window.onscroll = function() {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+
+        // 2. 滚动触发产品展示逻辑
         const cards = document.querySelectorAll('.card-link');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) entry.target.classList.add('active');
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
             });
         }, { threshold: 0.1 });
+
         cards.forEach(card => observer.observe(card));
     </script>
 </body>
