@@ -270,43 +270,96 @@
     }
 </style>
 
+<div id="starlight-canopy" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);"></div>
+
+<style>
+    .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        opacity: 0;
+        /* 模拟光纤发散效果 */
+        box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    /* 呼吸动画：模拟星星闪烁 */
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.2); }
+    }
+
+    /* 高级感流星：极细、极快 */
+    .starlight-meteor {
+        position: absolute;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+        opacity: 0;
+        pointer-events: none;
+        filter: blur(0.5px);
+    }
+</style>
+
 <script>
-    function spawnStar() {
-        const field = document.getElementById('star-field');
+    const container = document.getElementById('starlight-canopy');
+    const starCount = 150; // 星星数量
+
+    // 1. 生成静谧星空
+    for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
-        star.className = 'star-ray';
+        star.className = 'star';
         
-        // 随机参数，确保自然
-        const w = Math.random() * 150 + 100; // 长度
-        const x = Math.random() * window.innerWidth; // 初始X
-        const y = Math.random() * (window.innerHeight / 2); // 初始Y（只在屏幕上半部出现）
-        const duration = Math.random() * 0.5 + 0.4; // 极速：0.4s-0.9s完成
+        // 随机大小：0.5px 到 1.5px 之间，模拟劳斯莱斯光纤头
+        const size = Math.random() * 1.5 + 0.5;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        
+        // 随机位置
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        
+        // 随机闪烁速度
+        const duration = Math.random() * 3 + 2;
+        const delay = Math.random() * 5;
+        star.style.animation = `twinkle ${duration}s infinite ease-in-out ${delay}s`;
+        
+        container.appendChild(star);
+    }
 
-        star.style.width = w + 'px';
-        star.style.left = x + 'px';
-        star.style.top = y + 'px';
+    // 2. 奢华流星：偶尔闪过
+    function launchMeteor() {
+        const meteor = document.createElement('div');
+        meteor.className = 'starlight-meteor';
+        
+        const length = Math.random() * 80 + 50;
+        const startX = Math.random() * window.innerWidth;
+        const startY = Math.random() * window.innerHeight * 0.7;
+        const speed = Math.random() * 0.4 + 0.3; // 极快
 
-        // 使用 JS 驱动动画，确保轨迹更丝滑
-        const animation = star.animate([
-            { transform: `translate(0, 0) rotate(-35deg)`, opacity: 0 },
-            { transform: `translate(-100px, 70px) rotate(-35deg)`, opacity: 0.6, offset: 0.2 },
-            { transform: `translate(-500px, 350px) rotate(-35deg)`, opacity: 0 }
+        meteor.style.width = `${length}px`;
+        meteor.style.left = `${startX}px`;
+        meteor.style.top = `${startY}px`;
+        meteor.style.transform = `rotate(-30deg)`;
+
+        const anim = meteor.animate([
+            { transform: `translateX(0) translateY(0) rotate(-30deg)`, opacity: 0 },
+            { transform: `translateX(-200px) translateY(120px) rotate(-30deg)`, opacity: 0.7, offset: 0.2 },
+            { transform: `translateX(-500px) translateY(300px) rotate(-30deg)`, opacity: 0 }
         ], {
-            duration: duration * 1000,
-            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' // 减速曲线，看起来更写实
+            duration: speed * 1000,
+            easing: 'ease-out'
         });
 
-        field.appendChild(star);
-        animation.onfinish = () => star.remove();
+        container.appendChild(meteor);
+        anim.onfinish = () => meteor.remove();
     }
 
-    // 严控频率：每 5 到 12 秒才出现一颗，这种“难得一见”的感觉才贵
-    function loop() {
-        spawnStar();
-        setTimeout(loop, Math.random() * 7000 + 5000);
+    // 每 8-15 秒才出现一次流星，保持克制
+    function meteorLoop() {
+        launchMeteor();
+        setTimeout(meteorLoop, Math.random() * 7000 + 8000);
     }
 
-    loop();
+    meteorLoop();
 </script>
 </body>
 </html>
