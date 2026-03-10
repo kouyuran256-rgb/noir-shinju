@@ -39,16 +39,16 @@
 
         .logo { 
             font-weight: 700; 
-            font-size: 18px; 
-            letter-spacing: 5px;
+            font-size: 16px; 
+            letter-spacing: 4px;
             text-decoration: none;
             color: white;
-            display: inline-block; /* 为了磁性吸附生效 */
+            display: inline-block;
         }
 
         .menu {
             display: flex;
-            gap: 40px;
+            gap: 30px;
             align-items: center;
         }
 
@@ -56,15 +56,20 @@
             text-decoration: none; 
             color: white; 
             opacity: 0.5; 
-            font-size: 11px; 
+            font-size: 10px; 
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: opacity 0.4s;
-            display: inline-block; /* 为了磁性吸附生效 */
+            display: inline-block;
         }
 
-        .menu a:hover { 
-            opacity: 1; 
+        /* --- Tokyo Clock --- */
+        #tokyo-clock {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #555;
+            text-transform: uppercase;
+            margin-right: 15px;
         }
 
         /* --- Hero Section --- */
@@ -77,20 +82,21 @@
             text-align: center;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url("https://images.unsplash.com/photo-1520975922284-9f3c1b7c0c2d?q=80&w=2000") center/cover no-repeat;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: clamp(36px, 10vw, 85px);
-            letter-spacing: 18px;
+            font-size: clamp(32px, 8vw, 80px);
+            letter-spacing: 12px;
             margin: 0;
             animation: clearFadeUp 1.4s cubic-bezier(0.2, 1, 0.3, 1) forwards;
         }
 
         .hero p {
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             opacity: 0;
-            font-size: 12px;
-            margin-top: 25px;
+            font-size: 10px;
+            margin-top: 20px;
             animation: clearFadeUp 1.4s cubic-bezier(0.2, 1, 0.3, 1) 0.4s forwards;
             text-transform: uppercase;
             color: #888;
@@ -98,7 +104,7 @@
 
         /* --- Collection Grid --- */
         .collection { 
-            padding: 140px 60px; 
+            padding: 100px 60px; 
             max-width: 1400px;
             margin: 0 auto;
             text-align: center; 
@@ -107,16 +113,16 @@
         .grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 50px; 
-            margin-top: 80px;
+            gap: 40px; 
+            margin-top: 60px;
         }
         
         .card-link { 
             text-decoration: none; 
             color: inherit; 
             opacity: 0; 
-            transform: translateY(40px);
-            transition: opacity 1.2s cubic-bezier(0.2, 1, 0.3, 1), transform 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s;
             display: block;
         }
 
@@ -129,67 +135,44 @@
 
         .card img { 
             width: 100%; 
+            aspect-ratio: 3/4;
+            object-fit: cover;
             display: block;
             transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); 
             filter: grayscale(20%) brightness(0.8); 
         }
         
-        .card:hover img { 
-            transform: scale(1.05); 
-            filter: grayscale(0%) brightness(1); 
-        }
-
         .card p { 
-            margin-top: 25px; 
-            font-size: 11px; 
-            letter-spacing: 3px; 
+            margin-top: 20px; 
+            font-size: 10px; 
+            letter-spacing: 2px; 
             color: #666;
             text-transform: uppercase;
         }
 
-        /* --- 星空相关样式 --- */
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0;
-            box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.2);
-        }
+        /* 星空 Styles */
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+        .starlight-meteor { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, #fff, transparent); opacity: 0; }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.2); }
-        }
-
-        .starlight-meteor {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
-            opacity: 0;
-            pointer-events: none;
-            filter: blur(0.5px);
-        }
-
-        /* Animations */
         @keyframes clearFadeUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Footer */
-        footer {
-            padding: 100px 60px;
-            text-align: center;
-            border-top: 1px solid #111;
-        }
+        footer { padding: 80px 40px; text-align: center; border-top: 1px solid #111; }
 
-        /* Mobile Responsive */
-        @media (max-width: 850px) {
-            .grid { grid-template-columns: 1fr; gap: 60px; }
+        /* --- 核心适配：Mobile Responsive --- */
+        @media (max-width: 900px) {
             nav { padding: 20px 30px; }
-            nav.scrolled { padding: 15px 30px; }
-            .menu { gap: 20px; }
-            .menu a { font-size: 10px; letter-spacing: 1px; }
+            #tokyo-clock { display: none; } /* 手机端隐藏时钟防止拥挤 */
+            .menu { gap: 15px; }
+            .collection { padding: 60px 20px; }
+            .grid { 
+                grid-template-columns: 1fr; /* 手机端变为 1 列 */
+                gap: 50px; 
+            }
+            .hero h1 { letter-spacing: 8px; }
         }
     </style>
 </head>
@@ -200,9 +183,7 @@
     <nav id="mainNav">
         <a href="index.html" class="logo">NOIR SHINJU</a>
         <div class="menu">
-            <div id="tokyo-clock" style="font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-right: 10px;">
-                TOKYO <span id="clock-time">00:00:00</span>
-            </div>
+            <div id="tokyo-clock">TOKYO <span id="clock-time">00:00:00</span></div>
             <a href="index.html">HOME</a>
             <a href="#collection">COLLECTION</a>
             <a href="https://www.instagram.com/noirshinju" target="_blank">INSTAGRAM</a>
@@ -219,110 +200,68 @@
             <a href="product1.html" class="card-link">
                 <div class="card"><img src="shirt1.png"><p>GOLF TEE / 1 OF 10</p></div>
             </a>
-            
             <a href="product2.html" class="card-link">
                 <div class="card"><img src="shirt2.png"><p>ESSENTIAL / 1 OF 10</p></div>
             </a>
-
             <a href="about.html" class="card-link">
-                <div class="card">
-                    <img src="shirt3.png"> 
-                    <p>BRAND STORY / 00</p>
-                </div>
+                <div class="card"><img src="shirt3.png"><p>BRAND STORY / 00</p></div>
             </a>
         </div>
     </section>
 
     <footer>
-        <p style="font-size: 9px; color: #333; letter-spacing: 3px; text-transform: uppercase;">
+        <p style="font-size: 8px; color: #333; letter-spacing: 2px; text-transform: uppercase;">
             © 2026 NOIR SHINJU. TOKYO, JAPAN.
         </p>
     </footer>
 
     <script>
-        // 1. 导航栏滚动效果
+        // 1. 导航栏效果
         const nav = document.getElementById('mainNav');
-        window.onscroll = function() {
-            if (window.scrollY > 80) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+        window.onscroll = () => {
+            window.scrollY > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
         };
 
-        // 2. 滚动显现动画
-        const cards = document.querySelectorAll('.card-link');
+        // 2. 滚动显示
         const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
+            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
-        cards.forEach(card => observer.observe(card));
+        document.querySelectorAll('.card-link').forEach(card => observer.observe(card));
 
-        // 3. 劳斯莱斯星空逻辑
+        // 3. 星空顶
         const container = document.getElementById('starlight-canopy');
-        const starCount = 150;
-        for (let i = 0; i < starCount; i++) {
+        for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const size = Math.random() * 1.5 + 0.5;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.top = `${Math.random() * 100}%`;
-            const duration = Math.random() * 3 + 2;
-            const delay = Math.random() * 5;
-            star.style.animation = `twinkle ${duration}s infinite ease-in-out ${delay}s`;
+            const size = Math.random() * 1.5;
+            star.style.cssText = `width:${size}px; height:${size}px; left:${Math.random()*100}%; top:${Math.random()*100}%; animation: twinkle ${Math.random()*3+2}s infinite ${Math.random()*5}s`;
             container.appendChild(star);
         }
 
-        function launchMeteor() {
-            const meteor = document.createElement('div');
-            meteor.className = 'starlight-meteor';
-            const length = Math.random() * 80 + 50;
-            const startX = Math.random() * window.innerWidth;
-            const startY = Math.random() * window.innerHeight * 0.7;
-            const speed = Math.random() * 0.4 + 0.3;
-            meteor.style.width = `${length}px`;
-            meteor.style.left = `${startX}px`;
-            meteor.style.top = `${startY}px`;
-            meteor.style.transform = `rotate(-30deg)`;
-            const anim = meteor.animate([
-                { transform: `translateX(0) translateY(0) rotate(-30deg)`, opacity: 0 },
-                { transform: `translateX(-200px) translateY(120px) rotate(-30deg)`, opacity: 0.7, offset: 0.2 },
-                { transform: `translateX(-500px) translateY(300px) rotate(-30deg)`, opacity: 0 }
-            ], { duration: speed * 1000, easing: 'ease-out' });
-            container.appendChild(meteor);
-            anim.onfinish = () => meteor.remove();
-        }
-        setInterval(() => { if(Math.random() > 0.7) launchMeteor(); }, 3000);
-
-        // 4. 东京时钟逻辑
+        // 4. 东京时钟
         function updateClock() {
-            const options = { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            const formatter = new Intl.DateTimeFormat('en-GB', options);
-            document.getElementById('clock-time').innerHTML = formatter.format(new Date());
+            const time = new Date().toLocaleTimeString('en-GB', {timeZone:'Asia/Tokyo', hour12:false});
+            document.getElementById('clock-time').innerHTML = time;
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClock, 1000); updateClock();
 
-        // 5. 磁性吸附逻辑
-        const magneticElements = document.querySelectorAll('.menu a, .card-link, .logo');
-        magneticElements.forEach(el => {
-            el.addEventListener('mousemove', function(e) {
-                const pos = this.getBoundingClientRect();
-                const x = e.clientX - pos.left - pos.width / 2;
-                const y = e.clientY - pos.top - pos.height / 2;
-                this.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-                this.style.transition = 'transform 0.1s ease-out';
+        // 5. 磁性吸附 (仅在非触摸屏电脑端生效)
+        if (window.matchMedia("(pointer: fine)").matches) {
+            const elements = document.querySelectorAll('.menu a, .card-link, .logo');
+            elements.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const x = (e.clientX - rect.left - rect.width/2) * 0.3;
+                    const y = (e.clientY - rect.top - rect.height/2) * 0.3;
+                    el.style.transform = `translate(${x}px, ${y}px)`;
+                    el.style.transition = 'transform 0.1s ease-out';
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'translate(0, 0)';
+                    el.style.transition = 'transform 0.5s ease-out';
+                });
             });
-            el.addEventListener('mouseleave', function() {
-                this.style.transform = 'translate(0px, 0px)';
-                this.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-            });
-        });
+        }
     </script>
 </body>
 </html>
