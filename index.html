@@ -63,7 +63,6 @@
             display: inline-block;
         }
 
-        /* --- Tokyo Clock --- */
         #tokyo-clock {
             font-size: 10px;
             letter-spacing: 2px;
@@ -142,6 +141,11 @@
             filter: grayscale(20%) brightness(0.8); 
         }
         
+        .card:hover img { 
+            transform: scale(1.05); /* 仅保留缩放效果，不吸附鼠标 */
+            filter: grayscale(0%) brightness(1); 
+        }
+
         .card p { 
             margin-top: 20px; 
             font-size: 10px; 
@@ -162,16 +166,13 @@
 
         footer { padding: 80px 40px; text-align: center; border-top: 1px solid #111; }
 
-        /* --- 核心适配：Mobile Responsive --- */
+        /* Mobile Responsive */
         @media (max-width: 900px) {
             nav { padding: 20px 30px; }
-            #tokyo-clock { display: none; } /* 手机端隐藏时钟防止拥挤 */
+            #tokyo-clock { display: none; }
             .menu { gap: 15px; }
             .collection { padding: 60px 20px; }
-            .grid { 
-                grid-template-columns: 1fr; /* 手机端变为 1 列 */
-                gap: 50px; 
-            }
+            .grid { grid-template-columns: 1fr; gap: 50px; }
             .hero h1 { letter-spacing: 8px; }
         }
     </style>
@@ -241,14 +242,15 @@
         // 4. 东京时钟
         function updateClock() {
             const time = new Date().toLocaleTimeString('en-GB', {timeZone:'Asia/Tokyo', hour12:false});
-            document.getElementById('clock-time').innerHTML = time;
+            const clockEl = document.getElementById('clock-time');
+            if(clockEl) clockEl.innerHTML = time;
         }
         setInterval(updateClock, 1000); updateClock();
 
-        // 5. 磁性吸附 (仅在非触摸屏电脑端生效)
+        // 5. 磁性吸附 (仅应用于 Logo 和 菜单链接，移除衣服卡片吸附)
         if (window.matchMedia("(pointer: fine)").matches) {
-            const elements = document.querySelectorAll('.menu a, .card-link, .logo');
-            elements.forEach(el => {
+            const navElements = document.querySelectorAll('.menu a, .logo'); // 这里去掉了 .card-link
+            navElements.forEach(el => {
                 el.addEventListener('mousemove', (e) => {
                     const rect = el.getBoundingClientRect();
                     const x = (e.clientX - rect.left - rect.width/2) * 0.3;
