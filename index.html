@@ -256,38 +256,57 @@
     }
 </style>
 
+<div id="star-field" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></div>
+
+<style>
+    .star-ray {
+        position: absolute;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+        height: 1px; /* 极细，才有高级感 */
+        filter: blur(0.5px); /* 微弱模糊 */
+        transform: rotate(-35deg); /* 电影常见的入场角度 */
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+
 <script>
-    function createShootingStar() {
-        const container = document.getElementById('star-container');
+    function spawnStar() {
+        const field = document.getElementById('star-field');
         const star = document.createElement('div');
-        star.className = 'shooting-star';
+        star.className = 'star-ray';
         
-        // 随机位置（屏幕上半部分）
-        const startX = Math.random() * window.innerWidth + 200;
-        const startY = Math.random() * window.innerHeight / 2;
-        
-        star.style.left = `${startX}px`;
-        star.style.top = `${startY}px`;
-        
-        // 随机动画时长（2s - 4s），让每一颗流星速度不同
-        const duration = Math.random() * 2 + 2;
-        star.style.animationDuration = `${duration}s`;
+        // 随机参数，确保自然
+        const w = Math.random() * 150 + 100; // 长度
+        const x = Math.random() * window.innerWidth; // 初始X
+        const y = Math.random() * (window.innerHeight / 2); // 初始Y（只在屏幕上半部出现）
+        const duration = Math.random() * 0.5 + 0.4; // 极速：0.4s-0.9s完成
 
-        container.appendChild(star);
+        star.style.width = w + 'px';
+        star.style.left = x + 'px';
+        star.style.top = y + 'px';
 
-        // 动画结束后移除元素，防止占用内存
-        setTimeout(() => {
-            star.remove();
-        }, duration * 1000);
+        // 使用 JS 驱动动画，确保轨迹更丝滑
+        const animation = star.animate([
+            { transform: `translate(0, 0) rotate(-35deg)`, opacity: 0 },
+            { transform: `translate(-100px, 70px) rotate(-35deg)`, opacity: 0.6, offset: 0.2 },
+            { transform: `translate(-500px, 350px) rotate(-35deg)`, opacity: 0 }
+        ], {
+            duration: duration * 1000,
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' // 减速曲线，看起来更写实
+        });
+
+        field.appendChild(star);
+        animation.onfinish = () => star.remove();
     }
 
-    // 控制流星频率：每 3-7 秒出现一颗
-    function launch() {
-        createShootingStar();
-        setTimeout(launch, Math.random() * 4000 + 3000); 
+    // 严控频率：每 5 到 12 秒才出现一颗，这种“难得一见”的感觉才贵
+    function loop() {
+        spawnStar();
+        setTimeout(loop, Math.random() * 7000 + 5000);
     }
 
-    launch();
+    loop();
 </script>
 </body>
 </html>
