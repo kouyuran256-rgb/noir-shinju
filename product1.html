@@ -26,14 +26,14 @@
         .back-btn { text-decoration: none; color: #888; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
         .back-btn:hover { color: white; }
 
-        /* --- Section 1: Cinematic Poster --- */
+        /* --- Section 1: Hero Poster (模特海报) --- */
         .hero-poster {
             position: relative;
             height: 100vh;
             width: 100%;
             background-color: #000;
             display: flex;
-            align-items: flex-end; /* 文字放在底部 */
+            align-items: flex-end; 
             justify-content: center;
             overflow: hidden;
         }
@@ -44,15 +44,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.7);
+            filter: brightness(0.8);
             z-index: 1;
+            transition: transform 2s ease-out;
         }
 
-        /* 渐变遮罩：确保图片能平滑融入下方的详情区 */
         .poster-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, transparent 60%, #000 100%);
+            background: linear-gradient(to bottom, transparent 50%, #000 100%);
             z-index: 2;
         }
 
@@ -60,22 +60,14 @@
             position: relative;
             z-index: 3;
             text-align: center;
-            padding-bottom: 80px;
-            animation: fadeIn 2s ease;
+            padding-bottom: 10vh;
+            animation: fadeIn 2.5s ease;
         }
 
-        .poster-content h2 {
-            font-size: 10px;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 10px;
-        }
-
-        /* --- Section 2: Product Info --- */
+        /* --- Section 2: Product Detail (产品详情) --- */
         .details-section {
-            padding: 100px 60px;
-            max-width: 1200px;
+            padding: 140px 60px;
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1.2fr 1fr;
@@ -84,47 +76,47 @@
 
         .image-gallery img {
             width: 100%;
-            margin-bottom: 60px;
-            filter: grayscale(10%) brightness(0.9);
+            margin-bottom: 80px;
+            filter: brightness(0.9);
             transition: 0.8s;
+            background: #0a0a0a;
         }
 
         .info-panel {
             position: sticky;
-            top: 120px;
+            top: 140px;
             height: fit-content;
         }
 
         .info-panel h1 { font-size: 32px; letter-spacing: 8px; margin: 0; font-weight: 300; }
-        .price { font-size: 16px; color: #666; margin-top: 10px; letter-spacing: 3px; }
-        .description { font-size: 13px; line-height: 2; color: #999; margin: 50px 0; letter-spacing: 1px; }
+        .price { font-size: 16px; color: #666; margin-top: 15px; letter-spacing: 3px; }
+        .description { font-size: 13px; line-height: 2.2; color: #999; margin: 60px 0; letter-spacing: 1px; }
 
         .buy-button {
             display: block;
             width: 100%;
-            padding: 22px;
+            padding: 24px;
             background: white;
             color: black;
             text-align: center;
             text-decoration: none;
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
             transition: 0.3s;
         }
         .buy-button:hover { background: #333; color: white; }
 
-        .specs { margin-top: 50px; border-top: 1px solid #111; padding-top: 30px; }
-        .specs p { font-size: 9px; color: #444; letter-spacing: 2px; text-transform: uppercase; margin: 10px 0; }
+        .specs { margin-top: 60px; border-top: 1px solid #111; padding-top: 40px; }
+        .specs p { font-size: 9px; color: #444; letter-spacing: 2px; text-transform: uppercase; margin: 12px 0; }
 
-        /* 胶片感动画 */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Mobile Responsive */
+        /* Mobile */
         @media (max-width: 900px) {
             nav { padding: 20px 30px; }
-            .details-section { grid-template-columns: 1fr; padding: 60px 25px; }
+            .details-section { grid-template-columns: 1fr; padding: 60px 30px; }
             .info-panel { position: relative; top: 0; }
         }
     </style>
@@ -137,18 +129,18 @@
     </nav>
 
     <section class="hero-poster">
-        <img src="your-model-image.jpg" alt="Model Showcase">
+        <img src="your-model-image.jpg" id="modelImg" alt="Noir Shinju Model">
         <div class="poster-overlay"></div>
         <div class="poster-content">
-            <h2>Lookbook 01</h2>
-            <p style="font-size: 11px; letter-spacing: 4px; opacity: 0.4;">SCROLL TO VIEW DETAIL</p>
+            <h2 style="font-size: 11px; letter-spacing: 12px; opacity: 0.5; margin-bottom: 10px;">GOLF COLLECTION</h2>
+            <p style="font-size: 10px; letter-spacing: 5px; opacity: 0.3;">01 / 10</p>
         </div>
     </section>
 
     <section class="details-section">
         <div class="image-gallery">
-            <img src="shirt1.png" alt="Front View">
-            <img src="shirt1.png" alt="Back View" style="filter: brightness(0.7);"> 
+            <img src="shirt1.png" alt="Shirt Front View">
+            <img src="shirt1.png" style="opacity: 0.5;" alt="Shirt Detail View">
         </div>
 
         <div class="info-panel">
@@ -156,35 +148,37 @@
             <div class="price">299 €</div>
             
             <p class="description">
-                Limited Edition 1/10. <br>
-                Crafted from ultra-heavyweight Japanese cotton. <br>
-                Features the signature Noir Shinju golf-skull graphic on reverse. 
-                Designed in Tokyo for those who find beauty in the shadows.
+                1 OF 10 LIMITED PIECES. <br><br>
+                A statement of quiet luxury. This high-density cotton tee features the signature "NOIR SHINJU" golf-skull graphic. Designed in Tokyo, crafted for the eternal dark.
             </p>
 
-            <a href="#" class="buy-button">Purchase</a>
+            <a href="#" class="buy-button">Request to Purchase</a>
 
             <div class="specs">
-                <p>Fit: Oversized Silhouette</p>
-                <p>Material: 100% Cotton / 350 GSM</p>
-                <p>Origin: Tokyo, Japan</p>
+                <p>Fit: Signature Boxy Fit</p>
+                <p>Fabric: 100% Heavyweight Cotton</p>
+                <p>Location: Tokyo, Japan</p>
             </div>
         </div>
     </section>
 
     <script>
-        // 导航栏滚动逻辑
+        // 1. 导航栏滚动逻辑
         window.onscroll = () => {
             const nav = document.getElementById('mainNav');
+            const model = document.getElementById('modelImg');
             if (window.scrollY > 80) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
+            
+            // 视差滚动缩放
+            model.style.transform = `scale(${1 + window.scrollY/5000})`;
         };
 
-        // 处理图片加载失败（备选方案）
-        document.querySelector('.hero-poster img').onerror = function() {
-            console.error("图片加载失败，请检查文件名大小写。");
-            this.style.display = 'none';
-            document.querySelector('.hero-poster').style.background = '#0a0a0a';
+        // 2. 图片加载容错逻辑
+        const modelImg = document.getElementById('modelImg');
+        modelImg.onerror = function() {
+            console.log("JPG 加载失败，尝试 PNG...");
+            this.src = "your-model-image.png"; 
         };
     </script>
 </body>
