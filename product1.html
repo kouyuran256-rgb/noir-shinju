@@ -5,95 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOIR SHINJU | GOLF TEE</title>
     <style>
-        body { margin: 0; background: #000; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        body { margin: 0; background: #000; color: white; font-family: 'Helvetica Neue', Arial, sans-serif; }
         
-        /* Navigation */
-        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 25px 60px; z-index: 1000; box-sizing: border-box; transition: 0.5s; }
-        nav.scrolled { background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); padding: 15px 60px; }
+        /* 导航栏 */
+        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 25px 60px; z-index: 1000; box-sizing: border-box; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
         .logo { font-weight: 700; font-size: 16px; letter-spacing: 4px; text-decoration: none; color: white; }
-        .back { text-decoration: none; color: #666; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
-        .back:hover { color: white; }
+        .back { text-decoration: none; color: #888; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* Hero: 模特大海报 */
-        .hero { position: relative; height: 100vh; width: 100%; overflow: hidden; background: #000; }
-        .hero img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            filter: brightness(0.7); 
-            display: block;
-            transition: transform 2s ease-out;
+        /* 内容区 */
+        .container { 
+            max-width: 1200px; margin: 0 auto; padding: 120px 60px; 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; 
         }
-        .overlay { 
-            position: absolute; bottom: 0; width: 100%; height: 50%; 
-            background: linear-gradient(transparent, #000); 
-            z-index: 2;
-        }
-
-        /* Content: 产品详情 */
-        .content { 
-            max-width: 1200px; margin: 0 auto; padding: 100px 60px; 
-            display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; 
-        }
-        .product-img img { width: 100%; filter: brightness(0.9); display: block; background: #0a0a0a; }
+        .image-box img { width: 100%; height: auto; display: block; filter: brightness(0.9); }
         
-        .details { position: sticky; top: 120px; height: fit-content; }
-        .details h1 { font-size: 32px; letter-spacing: 8px; font-weight: 300; margin: 0; }
-        .price { color: #666; margin: 20px 0; letter-spacing: 2px; font-size: 18px; }
-        .desc { font-size: 13px; line-height: 2.2; color: #999; margin: 40px 0; letter-spacing: 1px; }
+        .info-box { padding-top: 40px; }
+        .info-box h1 { font-size: 32px; letter-spacing: 6px; margin: 0; font-weight: 300; }
+        .price { color: #666; margin: 20px 0 font-size: 18px; }
+        .desc { font-size: 14px; line-height: 2; color: #999; margin: 40px 0; }
         
         .buy-btn { 
-            display: block; width: 100%; padding: 22px; background: white; color: black; 
+            display: block; width: 100%; padding: 20px; background: white; color: black; 
             text-align: center; text-decoration: none; font-size: 11px; font-weight: 700; 
-            letter-spacing: 4px; text-transform: uppercase; transition: 0.3s;
+            letter-spacing: 4px; text-transform: uppercase; 
         }
-        .buy-btn:hover { background: #333; color: white; }
 
+        /* 手机端适配 */
         @media (max-width: 900px) {
-            .content { grid-template-columns: 1fr; padding: 40px 25px; }
-            nav { padding: 20px 30px; }
+            .container { grid-template-columns: 1fr; padding: 100px 20px; }
+            nav { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <nav id="mainNav">
+    <nav>
         <a href="index.html" class="logo">NOIR SHINJU</a>
-        <a href="index.html#collection" class="back">Close</a>
+        <a href="index.html#collection" class="back">Back</a>
     </nav>
 
-    <section class="hero">
-        <img src="your-model-image.png" id="heroImg" alt="Noir Shinju Editorial">
-        <div class="overlay"></div>
-    </section>
-
-    <section class="content">
-        <div class="product-img">
-            <img src="shirt1.png" alt="Golf Tee Product View">
+    <div class="container">
+        <div class="image-box">
+            <img src="shirt1.png" alt="Product Image">
         </div>
 
-        <div class="details">
+        <div class="info-box">
             <h1>GOLF TEE</h1>
             <div class="price">299 €</div>
             <p class="desc">
                 1 OF 10 LIMITED PIECES. <br><br>
-                High-density heavyweight Japanese cotton. 
-                Signature "NOIR SHINJU" golf-skull graphic. 
-                Designed in Tokyo, crafted for the eternal dark.
+                High-density heavyweight Japanese cotton. <br>
+                Designed in Tokyo.
             </p>
-            <a href="#" class="buy-btn">Request Purchase</a>
+            <a href="#" class="buy-btn">Purchase</a>
         </div>
-    </section>
+    </div>
 
-    <script>
-        window.onscroll = () => {
-            const nav = document.getElementById('mainNav');
-            const heroImg = document.getElementById('heroImg');
-            const scroll = window.pageYOffset;
-
-            if (scroll > 80) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-
-            heroImg.style.transform = `scale(${1 + scroll/5000})`;
-        };
-    </script>
 </body>
 </html>
